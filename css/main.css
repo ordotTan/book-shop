@@ -1,11 +1,16 @@
+*{
+    box-sizing: border-box;
+    }
+
 body {
     font-family: 'Baloo Thambi 2', cursive;
     background-image: url("/img/books.jpg");
     background-repeat: repeat;
     background-size: 1500px;
     color: black;
+    padding: 0;
+    margin: 0;
 }
-
 
 h4 {
     display: inline;
@@ -16,18 +21,17 @@ h2 {
 }
 
 th {
-    background-color: gray;
+    background-color: #92645a;
     color: white;
     padding: 15px;
 }
 
 td {
-    background-color:lightgray;
+    background-color:#d7b58d94;
     font-size: 20px;
     padding: 5px;
 
 }
-
 
 button {
     background-color: brown;
@@ -35,18 +39,20 @@ button {
     border-radius: 5px;
     font-size: 15px;
     cursor: pointer;
+    opacity: 1;
+    height: 30px;
     
 }
 
 button:hover {
-    color: yellow;
-    box-shadow: 4px -3px 53px 16px rgba(219,209,27,1);
+    opacity: 0.8;
+
 }
 
-
+/* price update modal */
 
 .price-update-modal {
-    position: absolute;
+    position: fixed;
     top: 15%;
     left:50%;
     padding: 10px;
@@ -58,18 +64,27 @@ button:hover {
 .price-update-info {
     display:flex;
     flex-direction: row wrap;
-    justify-content: space-between
+    justify-content: space-around;
+    align-items: center;
 }
 
 .update-price-btn {
     margin-left:5px;
 }
 
+.book-to-update {
+    color:black;
+    font-size: 1.5em;
+    margin-right: 10px;
+    margin-left: 10px;
+
+}
 
 
+/* book details modal */
 
 .book-details-modal {
-    position: absolute;
+    position: fixed;
     top: 15%;
     left:50%;
     width:500px;
@@ -79,6 +94,10 @@ button:hover {
     border: 1px solid black
 
 }
+
+.details-modal-close {
+    align-self: flex-end;
+    }
 
 .book-info {
     display:flex;
@@ -93,8 +112,8 @@ button:hover {
 
 .close-modal {
     font-size: medium;
-    text-align: center;
     cursor: pointer;
+    margin-left: 10px;
     width: 30px;
 }
 
@@ -102,50 +121,72 @@ button:hover {
     color: red;
 }
 
+/* upper-toolbar */
 
 .upper-toolbar {
     position: fixed;
     top:0px;
     padding: 5px;
-}
-
-.upper-toolbar-content {
+    z-index: 1;
     display: flex;
-    justify-content:left;
+    justify-content:flex-start;
+    background-color:#cfbcab;
+    width: 100%;
+    height: 50px;
+    align-items:center; 
+    border-bottom: 1px solid black;
+    border-top: 1px solid black;
+
 }
 
+.add-book-input {
+    background-color:#9c9387;
+    border: 2px solid black;
+    border-radius: 4px;
+    padding: 2px;
+    margin-left: 5px;
+}
+
+.add-book-confirm-btn {
+    margin-left: 10px;
+}
+
+
+.upper-toolbar a {
+
+    background-color: brown;
+    color: white;
+    border-radius: 5px;
+    font-size: 20px;
+    cursor: pointer;
+    align-self: center;
+    padding: 10px;;
+    text-align: center;
+    text-decoration: none;
+    opacity: 1;
+    height: 30px;
+    border-color: rgb(216, 216, 216) rgb(209, 209, 209) rgb(186, 186, 186);
+}
+
+/* main content */
 
 .main-content {
-    position: absolute;
-    top:50px;
+    padding-top: 30px;
+    margin-left:15px;
+    margin-bottom: 10px;
 }
 
 
-
-.book-to-update {
-    color:black;
-    font-size: 1.5em;
-    margin-right: 10px;
-    margin-left: 10px;
-
-}
-
-
-.sort-name {
-    cursor: pointer;
-}
-
+/* Paginatioan */
 
 .page-numbers {
     display: inline;
 }
 
 .active-page {
-   /* background-color: yellow; */
    border: 3px black solid;
 
 }
-
 
 /* Helpers */
 
@@ -156,3 +197,6 @@ button:hover {
     background-color: rgba(100,100,100,0.5);
 }
 
+.pointer {
+    cursor: pointer;
+}

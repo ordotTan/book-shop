@@ -38,7 +38,7 @@ function renderBookDetails(bookId) {
     elModal.querySelector('input[name="book-id"]').value = bookId
     elModal.hidden = false
     var imgPath = book.imgURL ? book.imgURL : 'defaultBook.jpg'
-    elModal.querySelector('img').src = '/img/' + imgPath
+    elModal.querySelector('img').src = 'img/' + imgPath
     elModal.querySelector('img').title = book.name
     elModal.querySelector('.book-rate').innerText = book.rating
     elModal.querySelector('p').innerText = book.desc
@@ -150,10 +150,13 @@ function onUpdateBook(bookId) {
     const elBookId = elModal.querySelector('input[name="book-id"]')
     elBookId.value = bookId
     elModal.hidden = false
+    elModal.querySelector('input[name="price"]').value=book.price
     elModal.querySelector('input[name="price"]').focus();
     elModal.querySelector('.book-to-update').innerText = book.name
 
 }
+
+{/* <input type="number" name="price"></input> */}
 
 function onPriceUpdate() {
     const elBookId = document.querySelector('.price-update-modal input[name="book-id"]')

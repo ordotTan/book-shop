@@ -1,7 +1,7 @@
 'use strict'
 const KEY = 'books'
 
-var gPageSize = 5;
+var gPageSize = 20
 var gNames = ['Harry Potter', 'Star Wars', 'The Hobbit']
 var gImagePaths = ['harry_potter.jpg', 'star_wars.jpg', 'hobbit.jpg']
 var gBooks

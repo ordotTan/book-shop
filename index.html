@@ -14,30 +14,25 @@
 <body onload="onInit()">
 
     <section class="upper-toolbar">
-        <div class="upper-toolbar-content">
-            <article class="add-new-book"> 
-                <button class="add-book-button" onclick="onShowAddBookToggle()">Add New Book</button>
-                <section class="add-book-input">
-                    Book Name: <input type="text" name="name"></input>
-                    Book Price: <input type="number" name="price"></input>
-                    <button onclick="onAddBook()">Add Book</button>
-                </section>
-            </article>
+        <button class="add-book-button" onclick="onShowAddBookToggle()">Add New Book</button>
+        <div class="add-book-input">
+            Book Name: <input type="text" name="name"></input>
+            Book Price: <input type="number" name="price"></input>
+            <button class="add-book-confirm-btn" onclick="onAddBook()">Confirm</button>
+        </div>
     </section>
-    </div>
-
 
 
     <section class="main-content">
-        <hr>
+
         <h1>My Books</h1>
         <table>
             <thead>
                 <th>#</th>
                 <th>ID</th>
-                <th class="sort-name" onclick="onSort('name')">Name <span></span></th>
-                <th class="sort-price" onclick="onSort('price')">Price ($) <span></span></th>
-                <th class="sort-rating" onclick="onSort('rating')">Rating <span></span></th>
+                <th class="sort-name pointer" onclick="onSort('name')">Name <span></span></th>
+                <th class="sort-price pointer" onclick="onSort('price')">Price ($) <span></span></th>
+                <th class="sort-rating pointer" onclick="onSort('rating')">Rating <span></span></th>
                 <th>Actions</th>
             </thead>
             <tbody class="books-content"></tbody>
@@ -48,19 +43,17 @@
             <div class="page-numbers"></div>
             <button class="next-page-button" onclick="onNextPage()">&gt;&gt;</button>
             Books per page:
-                <input type="number" name="items-per-page"></input>
-                <button onclick="onSetItemsPerPage()">Confirm</button>
-
-
+            <input type="number" name="items-per-page"></input>
+            <button onclick="onSetItemsPerPage()">Confirm</button>
         </section>
     </section>
 
 
     <div class="price-update-modal">
         <section class="price-update-info">
-            <button class="close-modal" onclick="onClosePriceUpdate()">X</button>
             <span class="book-to-update"></span><input type="number" name="price"></input>
             <button class="update-price-btn" onclick="onPriceUpdate()">Update Price</button>
+            <button class="close-modal" onclick="onClosePriceUpdate()">X</button>
             <input type="text" name="book-id" hidden></input>
         </section>
     </div>
@@ -68,7 +61,7 @@
 
     <div class="book-details-modal" hidden>
         <section class="book-info">
-            <button class="close-modal" onclick="onCloseBookDetailsModal()">X</button>
+            <button class="close-modal details-modal-close" onclick="onCloseBookDetailsModal()">X</button>
             <h2 class="book-title"></h2>
             <h3 class="book-price"></h3>
             <section class="rate-handler">
@@ -77,15 +70,10 @@
                 <span class="book-rate">0</span>
                 <button class="inc-rate-btn" onclick="onRateClick(1)">+</button>
             </section>
-
             <input type="text" name="book-id" hidden></input>
             <img src="img/defaultBook.jpg" width="150">
             <p class="book-desc"></p>
         </section>
-
-
-
-
     </div>
 
     <script src="js/util-service.js"></script>
