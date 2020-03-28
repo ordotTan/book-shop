@@ -1,0 +1,158 @@
+body {
+    font-family: 'Baloo Thambi 2', cursive;
+    background-image: url("/img/books.jpg");
+    background-repeat: repeat;
+    background-size: 1500px;
+    color: black;
+}
+
+
+h4 {
+    display: inline;
+}
+
+h2 {
+    margin: auto;
+}
+
+th {
+    background-color: gray;
+    color: white;
+    padding: 15px;
+}
+
+td {
+    background-color:lightgray;
+    font-size: 20px;
+    padding: 5px;
+
+}
+
+
+button {
+    background-color: brown;
+    color: white;
+    border-radius: 5px;
+    font-size: 15px;
+    cursor: pointer;
+    
+}
+
+button:hover {
+    color: yellow;
+    box-shadow: 4px -3px 53px 16px rgba(219,209,27,1);
+}
+
+
+
+.price-update-modal {
+    position: absolute;
+    top: 15%;
+    left:50%;
+    padding: 10px;
+    background-color:#ad9b9bcf;
+    border-radius: 5px;
+    border: 1px solid black
+}
+
+.price-update-info {
+    display:flex;
+    flex-direction: row wrap;
+    justify-content: space-between
+}
+
+.update-price-btn {
+    margin-left:5px;
+}
+
+
+
+
+.book-details-modal {
+    position: absolute;
+    top: 15%;
+    left:50%;
+    width:500px;
+    padding: 5px;
+    background-color:#ad9b9bcf;
+    border-radius: 5px;
+    border: 1px solid black
+
+}
+
+.book-info {
+    display:flex;
+    flex-direction: column;
+}
+
+.book-info img {
+    border: 1px solid black;
+    align-self: center;
+}
+
+
+.close-modal {
+    font-size: medium;
+    text-align: center;
+    cursor: pointer;
+    width: 30px;
+}
+
+.close-modal:hover {
+    color: red;
+}
+
+
+.upper-toolbar {
+    position: fixed;
+    top:0px;
+    padding: 5px;
+}
+
+.upper-toolbar-content {
+    display: flex;
+    justify-content:left;
+}
+
+
+.main-content {
+    position: absolute;
+    top:50px;
+}
+
+
+
+.book-to-update {
+    color:black;
+    font-size: 1.5em;
+    margin-right: 10px;
+    margin-left: 10px;
+
+}
+
+
+.sort-name {
+    cursor: pointer;
+}
+
+
+.page-numbers {
+    display: inline;
+}
+
+.active-page {
+   /* background-color: yellow; */
+   border: 3px black solid;
+
+}
+
+
+/* Helpers */
+
+.disabled-button {
+    color:lightgray;
+    pointer-events: none;
+    cursor: default;
+    background-color: rgba(100,100,100,0.5);
+}
+
