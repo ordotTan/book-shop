@@ -10,7 +10,7 @@ var gSortType = 1 //1=Asc
 var gPageIdx = 0;
 
 
-function getBooks() {
+function getBooksForRender() {
     var startIdx = gPageIdx * Math.min(gPageSize,gBooks.length)
     sortBooks(gBooks)
     var books = gBooks.slice(startIdx, startIdx + gPageSize)
@@ -58,16 +58,16 @@ function getBookbyID(bookId) {
 }
 
 function updateBook(bookId, key, value) {
-    var book = gBooks.find(book => book.id === bookId)
+    var book = getBookbyID(bookId)
     if (key === 'price') book.price = value
     else if (key === 'rating') book.rating += value
-    _saveToStorage()
+    _saveBooks()
 }
 
 function addBook(name, price) {
     var book = _createBook(name, price)
-    gBooks.push(book)
-    _saveToStorage()
+    gBooks.unshift(book)
+    _saveBooks()
 
 }
 
@@ -75,7 +75,7 @@ function removeBook(bookId) {
     var bookIdx = gBooks.findIndex(book => book.id === bookId)
     gBooks.splice(bookIdx, 1)
     if (gBooks.length % gPageSize === 0 && gPageIdx>0) gPageIdx--
-    _saveToStorage()
+    _saveBooks()
 
 }
 
@@ -93,23 +93,7 @@ function createBooks() {
     }
     gBooks = books;
 
-    _saveToStorage()
-}
-
-function _createBook(name, price, img) {
-    return {
-        id: makeId(),
-        name: name,
-        price: price,
-        imgURL: img,
-        rating: 0,
-        desc: makeLorem()
-    }
-
-}
-
-function _saveToStorage() {
-    saveToStorage(KEY, gBooks)
+    _saveBooks()
 }
 
 
@@ -129,4 +113,23 @@ function prevPage(currPage) {
 function setItemsPerPage(items) {
     gPageSize = +items
     gPageIdx = 0
+}
+
+
+// private functions 
+
+function _createBook(name, price, img) {
+    return {
+        id: makeId(),
+        name: name,
+        price: price,
+        imgURL: img,
+        rating: 0,
+        desc: makeLorem()
+    }
+
+}
+
+function _saveBooks() {
+    saveToStorage(KEY, gBooks)
 }

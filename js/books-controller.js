@@ -14,27 +14,39 @@ function onInit() {
 }
 
 function renderBooks() {
-    var i=0;
-    var books = getBooks()
-    var strHtmls = books.map(function getBookHTML(book) {
-        i++
-        return `<tr><td>${i}</td><td>${book.id}</td><td>${book.name}</td><td>${+book.price}</td><td>${+book.rating}</td>
-            <td class="actions">
-                <button onclick="renderBookDetails('${book.id}')">Read</button>
-                <button onclick="onUpdateBook('${book.id}')">Update</button>
-                <button onclick="onRemoveBook('${book.id}')">Delete</button>
-            </td>
-        </tr> 
-        `
-        
-    })
+    var i = 0;
+    var books = getBooksForRender()
+    var strHtmls = books.map (getBookHTML)
     document.querySelector('.books-content').innerHTML = strHtmls.join('')
 }
 
+function getBookHTML(book,idx) {
+    return `<tr><td>${idx+1}</td><td>${book.id}</td><td>${book.name}</td><td>${+book.price}</td><td>${+book.rating}</td>
+        <td class="actions">
+            <button onclick="renderBookDetails('${book.id}')">Read</button>
+            <button onclick="onUpdateBook('${book.id}')">Update</button>
+            <button onclick="onRemoveBook('${book.id}')">Delete</button>
+        </td>
+    </tr> 
+    `
+}
+
 function renderBookDetails(bookId) {
-    document.querySelector('.price-update-modal').hidden = true
-    const book = getBookbyID(bookId)
     const elModal = document.querySelector('.book-details-modal')
+    const book = getBookbyID(bookId)
+
+    //Handle starting rate
+    const elIncRateButton = elModal.querySelector('.inc-rate-btn')
+    const ellowerRateButton = elModal.querySelector('.lower-rate-btn')
+    elIncRateButton.classList.remove('disabled-button')
+    ellowerRateButton.classList.remove('disabled-button')
+    if (book.rating === 10)
+        elIncRateButton.classList.add('disabled-button')
+    if (book.rating === 0)
+        ellowerRateButton.classList.add('disabled-button')
+
+    //Render the modal
+    document.querySelector('.price-update-modal').hidden = true
     elModal.querySelector('input[name="book-id"]').value = bookId
     elModal.hidden = false
     var imgPath = book.imgURL ? book.imgURL : 'defaultBook.jpg'
@@ -90,10 +102,6 @@ function onPrevPage() {
 function handlePagination() {
     const currPageIndex = +getCurrPageIndex()
     const totalPages = getNumOfPages()
-
-    //console.log('currPageIndex',    currPageIndex)
-   // console.log('totalPages',totalPages)
-
     var elCurrPage = document.querySelector(`.page-numbers button:nth-child(${currPageIndex + 1})`)
     elCurrPage.classList.add('active-page')
 
@@ -124,12 +132,6 @@ function onRateClick(rateInc) {
     elIncRateButton.classList.remove('disabled-button')
     ellowerRateButton.classList.remove('disabled-button')
 
-    //Handle starting rate
-    if (elIncRateButton.innerText === 10)
-        elIncRateButton.classList.add('disabled-button')
-    if (ellowerRateButton.innerText === 0)
-        ellowerRateButton.classList.add('disabled-button')
-
     updateBook(elBookId.value, 'rating', rateInc)
     const newRate = getBookbyID(elBookId.value).rating
     elModal.querySelector('.book-rate').innerText = newRate
@@ -150,13 +152,13 @@ function onUpdateBook(bookId) {
     const elBookId = elModal.querySelector('input[name="book-id"]')
     elBookId.value = bookId
     elModal.hidden = false
-    elModal.querySelector('input[name="price"]').value=book.price
+    elModal.querySelector('input[name="price"]').value = book.price
     elModal.querySelector('input[name="price"]').focus();
     elModal.querySelector('.book-to-update').innerText = book.name
 
 }
 
-{/* <input type="number" name="price"></input> */}
+{/* <input type="number" name="price"></input> */ }
 
 function onPriceUpdate() {
     const elBookId = document.querySelector('.price-update-modal input[name="book-id"]')
@@ -169,10 +171,13 @@ function onPriceUpdate() {
 }
 
 function onRemoveBook(bookId) {
-    removeBook(bookId)
-    renderBooks()
-    renderPaging()
-    handlePagination()
+    var isConfirm = confirm('Are you sure?')
+    if (isConfirm) {
+        removeBook(bookId)
+        renderBooks()
+        renderPaging()
+        handlePagination()
+    }
 }
 
 function onAddBook() {
@@ -220,7 +225,7 @@ function onShowAddBookToggle() {
 
 function onSetItemsPerPage() {
     var items = document.querySelector('input[name="items-per-page"]').value
-    if (items<=0) return
+    if (items <= 0) return
     setItemsPerPage(items)
     renderBooks()
     renderPaging()
